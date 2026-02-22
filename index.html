@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UGH</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:linear-gradient(#ffd6e7,#fff0f5);
+font-family:cursive;
+text-align:center;
+}
+
+/* button */
+#btn{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+padding:20px 40px;
+font-size:26px;
+background:#ff4d88;
+color:white;
+border:none;
+border-radius:30px;
+cursor:pointer;
+}
+
+/* message */
+#msg{
+display:none;
+position:absolute;
+top:15%;
+width:100%;
+font-size:40px;
+color:#d6006e;
+font-weight:bold;
+}
+
+/* bouquet */
+#bouquet{
+display:none;
+position:absolute;
+bottom:-300px;
+left:50%;
+transform:translateX(-50%);
+transition:1.5s;
+}
+
+/* flower rain */
+.flower{
+position:absolute;
+top:-50px;
+font-size:24px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+}
+
+/* floating hearts */
+.heart{
+position:absolute;
+bottom:-50px;
+font-size:22px;
+animation:floatUp 6s linear forwards;
+}
+
+@keyframes floatUp{
+to{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+</style>
+</head>
+
+<body>
+
+<button id="btn">Click here 🌸</button>
+
+<div id="msg">Gussa toh ho par ye lo- Vedika🎀</div>
+
+<div id="bouquet">
+<img src="https://pngimg.com/uploads/bouquet/bouquet_PNG17.png" width="280">
+</div>
+
+<!-- hidden youtube player -->
+<div id="player"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+let player;
+
+function onYouTubeIframeAPIReady(){
+player=new YT.Player("player",{
+height:"0",
+width:"0",
+videoId:"WpBn9w-Js_c",
+playerVars:{start:33}
+});
+}
+
+document.getElementById("btn").onclick=function(){
+
+this.style.display="none";
+
+/* play song */
+if(player) player.playVideo();
+
+/* flowers */
+for(let i=0;i<40;i++){
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌸";
+f.style.left=Math.random()*100+"vw";
+f.style.animationDuration=(3+Math.random()*3)+"s";
+document.body.appendChild(f);
+}
+
+/* hearts */
+for(let i=0;i<25;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(4+Math.random()*3)+"s";
+document.body.appendChild(h);
+}
+
+/* bouquet + text */
+setTimeout(()=>{
+document.getElementById("bouquet").style.display="block";
+document.getElementById("msg").style.display="block";
+document.getElementById("bouquet").style.bottom="40px";
+},1200);
+
+};
+</script>
+
+</body>
+</html>
